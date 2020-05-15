@@ -1,0 +1,15 @@
+version: "3"
+services:
+    web:
+        build: ./web/.
+        ports:
+            - "8000:8000"
+        stdin_open: true
+        tty: true
+        command: uvicorn websocket_app.asgi:application --host 0.0.0.0
+        depends_on:
+            - redis
+    redis:
+        build: ./redis/.
+        ports:
+            - "6379:6379"
